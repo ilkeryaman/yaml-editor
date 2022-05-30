@@ -1,0 +1,15 @@
+c:\users\eilkyam\documents\visual studio 2015\Projects\Ericsson YAML Editor\Ericsson YAML Editor\obj\Debug\EricssonYAMLEditor.csprojResolveAssemblyReference.cache
+c:\users\eilkyam\documents\visual studio 2015\Projects\Ericsson YAML Editor\Ericsson YAML Editor\obj\Debug\EricssonYAMLEditor.Form1.resources
+c:\users\eilkyam\documents\visual studio 2015\Projects\Ericsson YAML Editor\Ericsson YAML Editor\obj\Debug\Ericsson_YAML_Editor.Properties.Resources.resources
+c:\users\eilkyam\documents\visual studio 2015\Projects\Ericsson YAML Editor\Ericsson YAML Editor\obj\Debug\EricssonYAMLEditor.csproj.GenerateResource.Cache
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\bin\Debug\EricssonYAMLEditor.exe.config
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\bin\Debug\EricssonYAMLEditor.exe
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\bin\Debug\EricssonYAMLEditor.pdb
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\bin\Debug\YamlDotNet.dll
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\bin\Debug\YamlDotNet.xml
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.Form1.resources
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.Properties.Resources.resources
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.csproj.GenerateResource.Cache
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.exe
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.pdb
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.csprojResolveAssemblyReference.cache

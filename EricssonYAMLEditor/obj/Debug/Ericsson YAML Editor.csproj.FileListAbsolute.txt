@@ -1,0 +1,1 @@
+c:\users\eilkyam\documents\visual studio 2015\Projects\Ericsson YAML Editor\Ericsson YAML Editor\bin\Debug\Ericsson YAML Editor.exe.config
