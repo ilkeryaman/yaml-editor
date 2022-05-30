@@ -9,12 +9,10 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet
     class YamlDotNetDynamicPanelConstructor : IDynamicPanelConstructor
     {
         private FlowLayoutPanel _panel;
-        private List<TextBox> textBoxList;
 
         public YamlDotNetDynamicPanelConstructor(FlowLayoutPanel panel)
         {
             _panel = panel;
-            textBoxList = new List<TextBox>();
         }
 
         public FlowLayoutPanel Panel
@@ -39,6 +37,11 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet
             {
                 Dictionary<object, object> dictData = (Dictionary<object, object>) data;
                 factory = new YamlDotNetDictionaryDynamicControlConstructorFactory(this, dictData);
+            }
+            else if (data is List<object>)
+            {
+                List<object> list = (List<object>) data;
+                factory = new YamlDotNetListDynamicControlConstructorFactory(this, list);
             }
             else if (data is string)
             {

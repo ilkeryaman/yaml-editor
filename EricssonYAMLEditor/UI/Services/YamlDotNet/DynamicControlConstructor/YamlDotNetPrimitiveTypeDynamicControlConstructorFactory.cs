@@ -13,7 +13,14 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.DynamicControlConstructor
 
         public override void ConstructDynamicControl(string key, bool isFromFirstLevelParent = false)
         {
-            ControlCreator.CreateTextBox(_dynamicPanelConstructor.Panel, key, _data);
+            if (_data.Contains("\n"))
+            {
+                ControlCreator.CreateTextArea(_dynamicPanelConstructor.Panel, key, _data);
+            }
+            else
+            {
+                ControlCreator.CreateTextBox(_dynamicPanelConstructor.Panel, key, _data);
+            }
         }
     }
 }

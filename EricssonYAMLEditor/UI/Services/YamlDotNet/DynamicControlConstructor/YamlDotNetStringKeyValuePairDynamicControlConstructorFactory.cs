@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace EricssonYAMLEditor.UI.Services.YamlDotNet.DynamicControlConstructor
 {
@@ -15,14 +14,7 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.DynamicControlConstructor
 
         public override void ConstructDynamicControl(string key, bool isFromFirstLevelParent = false)
         {
-            if (_data.Value is string)
-            {
-                ControlCreator.CreateTextBox(_dynamicPanelConstructor.Panel, key, Convert.ToString(_data.Value));
-            }
-            else if (_data.Value is Dictionary<object, object>)
-            {
-                _dynamicPanelConstructor.ConstructDynamicPanel(key, _data.Value);
-            }
+            _dynamicPanelConstructor.ConstructDynamicPanel(key, _data.Value);
         }
     }
 }
