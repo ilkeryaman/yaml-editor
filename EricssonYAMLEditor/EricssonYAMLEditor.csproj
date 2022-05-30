@@ -73,6 +73,16 @@
     <Compile Include="Parser\Services\YamlDotNet\YamlDotNetParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\DynamicPanelGenerator.cs" />
+    <Compile Include="UI\Interfaces\IDynamicPanelConstructor.cs" />
+    <Compile Include="UI\Services\ControlCreator.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDictionaryDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetKeyValuePairDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetListDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetPrimitiveTypeDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetStringKeyValuePairDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\YamlDotNetDynamicPanelConstructor.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

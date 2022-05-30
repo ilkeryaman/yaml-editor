@@ -13,7 +13,7 @@ namespace EricssonYAMLEditor
         public void test()
         {
             var deserializer = new Deserializer();
-            var result = deserializer.Deserialize<Dictionary<string, Object>>(new StreamReader("C:\\Users\\eilkyam\\Desktop\\ilker555.yaml"));
+            var result = deserializer.Deserialize<Dictionary<string, Object>>(new StreamReader("C:\\Users\\eilkyam\\Desktop\\ilker2.yaml"));
 
 
 

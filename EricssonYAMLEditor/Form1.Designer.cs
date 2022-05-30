@@ -37,7 +37,7 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(13, 13);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(379, 512);
+            this.treeView1.Size = new System.Drawing.Size(380, 500);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -48,7 +48,7 @@
             this.flowLayoutPanel1.WrapContents = false;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(399, 13);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(365, 512);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(750, 512);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // button1
@@ -65,7 +65,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 618);
+            this.ClientSize = new System.Drawing.Size(1150, 618);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.treeView1);
