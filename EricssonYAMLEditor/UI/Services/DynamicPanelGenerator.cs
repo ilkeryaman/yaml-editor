@@ -1,10 +1,9 @@
 ﻿using EricssonYAMLEditor.UI.Interfaces;
-using EricssonYAMLEditor.UI.Services;
 using EricssonYAMLEditor.UI.Services.YamlDotNet;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace EricssonYAMLEditor.UI
+namespace EricssonYAMLEditor.UI.Services
 {
     class DynamicPanelGenerator
     {

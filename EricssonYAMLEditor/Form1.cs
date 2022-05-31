@@ -4,7 +4,9 @@ using EricssonYAMLEditor.Node.Services.Interfaces;
 using EricssonYAMLEditor.Node.Services.YamlDotNet;
 using EricssonYAMLEditor.Parser.Services.Interfaces;
 using EricssonYAMLEditor.Parser.Services.YamlDotNet;
-using EricssonYAMLEditor.UI;
+using EricssonYAMLEditor.UI.Interfaces;
+using EricssonYAMLEditor.UI.Services;
+using EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -14,7 +16,6 @@ namespace EricssonYAMLEditor
     public partial class Form1 : Form
     {
         TreeNode rootNode;
-        YamlNode rrNode;
         Dictionary<string, object> yamlNodeDictionary;
 
         public Form1()
@@ -57,15 +58,16 @@ namespace EricssonYAMLEditor
 
         private void RenderTreeView(YamlNode rootYamlNode)
         {
+            IContextMenuStripConstructor contextMenuStripConstructor = new YamlDotNetContextMenuStripConstructor();
             rootNode = new TreeNode();
             rootNode.Name = rootYamlNode.Name;
             rootNode.Text = rootYamlNode.Name;
             rootNode.Tag = rootYamlNode.Name;
             treeView1.Nodes.Add(rootNode);
-            AddSubNodes(rootNode, rootYamlNode);
+            AddSubNodes(rootNode, rootYamlNode, contextMenuStripConstructor);
         }
 
-        private void AddSubNodes(TreeNode parentTreeNode, YamlNode yamlNode)
+        private void AddSubNodes(TreeNode parentTreeNode, YamlNode yamlNode, IContextMenuStripConstructor contextMenuStripConstructor)
         {
             foreach (YamlNode node in yamlNode.SubNodeList)
             {
@@ -73,8 +75,22 @@ namespace EricssonYAMLEditor
                 treeNode.Name = node.Name;
                 treeNode.Text = node.GetVisibleName(node.Name, node.ParentNode.Name);
                 treeNode.Tag = node;
+                treeNode.ContextMenuStrip = contextMenuStripConstructor.GetContextMenuStrip(node.Data);
                 parentTreeNode.Nodes.Add(treeNode);
-                AddSubNodes(treeNode, node);
+                AddSubNodes(treeNode, node, contextMenuStripConstructor);
+            }
+        }
+
+        /// <summary>
+        /// This event handler works in coordination with context menu strips of tree nodes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                treeView1.SelectedNode = e.Node;
             }
         }
 
@@ -98,9 +114,7 @@ namespace EricssonYAMLEditor
         private void button1_Click(object sender, EventArgs e)
         {
 
-            changeIt(rrNode.Data);
-            Helper h = new Helper();
-            h.test2(rrNode.Data);
+            
         }
     }
 }
