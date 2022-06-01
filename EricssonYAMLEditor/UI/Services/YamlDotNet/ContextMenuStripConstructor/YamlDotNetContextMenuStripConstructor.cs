@@ -1,6 +1,8 @@
 ﻿using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
 using EricssonYAMLEditor.ContentEditor.Services.YamlDotNet;
 using EricssonYAMLEditor.Node.Models;
+using EricssonYAMLEditor.Node.Services.Interfaces;
+using EricssonYAMLEditor.Node.Services.YamlDotNet;
 using EricssonYAMLEditor.UI.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,11 +14,13 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
     {
         ContextMenuStrip _contextMenuStripWithAddRemove;
         ContextMenuStrip _contextMenuStripWithRemove;
+        IYamlTreeBuilder _treeBuilder;
 
         public YamlDotNetContextMenuStripConstructor()
         {
             _contextMenuStripWithAddRemove = GetContextMenuStripWithAddRemove();
             _contextMenuStripWithRemove = GetContextMenuStripWithRemove();
+            _treeBuilder = new YamlDotNetTreeBuilder();
         }
 
         public ContextMenuStrip GetContextMenuStrip(object data)
@@ -79,8 +83,14 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
             IContentRemover contentRemover = new YamlDotNetContentRemover();
             if (contentRemover.RemoveContent(yamlNode))
             {
+                TreeNode parentNode = selectedNode.Parent;
                 yamlNode.Remove();
                 selectedNode.Remove();
+                if (yamlNode.IsItemOfListNode())
+                {
+                    _treeBuilder.UpdateListNode(yamlNode);
+                    UpdateTreeNodes(parentNode);
+                }
             }
         }
 
@@ -90,6 +100,16 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
             ContextMenuStrip contextMenuStrip = (ContextMenuStrip)toolStripMenuItem.GetCurrentParent();
             TreeView treeview = (TreeView)contextMenuStrip.SourceControl;
             return treeview.SelectedNode;
+        }
+
+        private void UpdateTreeNodes(TreeNode parentNode)
+        {
+            foreach(TreeNode treeNode in parentNode.Nodes)
+            {
+                YamlNode node = (YamlNode) treeNode.Tag;
+                treeNode.Name = node.Name;
+                treeNode.Text = node.GetVisibleName(node.Name, node.ParentNode.Name);
+            }
         }
     }
 }

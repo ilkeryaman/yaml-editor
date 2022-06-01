@@ -64,5 +64,14 @@ namespace EricssonYAMLEditor.Node.Services.YamlDotNet
 
             factory.ProcessNodes(parentPropertyName, value, parentNode);
         }
+
+        public void UpdateListNode(YamlNode node)
+        {
+            if(node.IsItemOfListNode())
+            {
+                YamlDotNetListParserFactory factory = new YamlDotNetListParserFactory(this);
+                factory.UpdateListNodes(node.ParentNode);
+            }
+        }
     }
 }

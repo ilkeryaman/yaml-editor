@@ -55,5 +55,18 @@ namespace EricssonYAMLEditor.Node.Models
             int lengthOfParentName = string.IsNullOrEmpty(parentName) ? 0 : parentName.Length;
             return name.Substring(lengthOfParentName);
         }
+
+        public bool IsItemOfListNode()
+        {
+            bool isItemOfListNode = false;
+
+            if (ParentNode != null && ParentNode.Data is KeyValuePair<object, object>)
+            {
+                KeyValuePair<object, object> kvp = (KeyValuePair<object, object>) ParentNode.Data;
+                isItemOfListNode = kvp.Value is List<object>;
+            }
+
+            return isItemOfListNode;
+        }
     }
 }

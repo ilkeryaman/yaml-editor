@@ -22,5 +22,15 @@ namespace EricssonYAMLEditor.Parser.Services.YamlDotNet.PropertyContentParser
                 _treeBuilder.ProcessNode(propertyName, item, parentNode);
             }
         }
+
+        public void UpdateListNodes(YamlNode node)
+        {
+            for(int i=0; i < node.SubNodeList.Count; i++)
+            {
+                YamlNode subNode = node.SubNodeList[i];
+                string propertyName = PropertyNamer.GetArrayItemPropertyName(node.Name, i);
+                subNode.Name = propertyName;
+            }
+        }
     }
 }
