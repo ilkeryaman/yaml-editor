@@ -42,5 +42,19 @@ namespace EricssonYAMLEditor
                 writer.Close();
             }
         }
+
+        public void test3(object data)
+        {
+            var stringBuilder = new StringBuilder();
+            var serializer = new Serializer();
+            stringBuilder.AppendLine(serializer.Serialize(data));
+
+            var stream = new FileStream("C:\\Users\\eilkyam\\Desktop\\yamldotnet_generated\\test\\aaaaa_generated.yaml", FileMode.OpenOrCreate);
+            using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
+            {
+                writer.Write(stringBuilder);
+                writer.Close();
+            }
+        }
     }
 }

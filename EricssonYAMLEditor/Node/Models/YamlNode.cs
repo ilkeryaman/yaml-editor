@@ -42,6 +42,14 @@ namespace EricssonYAMLEditor.Node.Models
             subNode._parentNode = this;
         }
 
+        public void Remove()
+        {
+            if(_parentNode != null && _parentNode._subNodeList != null)
+            {
+                _parentNode._subNodeList.Remove(this);
+            }
+        }
+
         public string GetVisibleName(string name, string parentName)
         {
             int lengthOfParentName = string.IsNullOrEmpty(parentName) ? 0 : parentName.Length;

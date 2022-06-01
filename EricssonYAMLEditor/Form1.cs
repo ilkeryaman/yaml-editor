@@ -39,7 +39,7 @@ namespace EricssonYAMLEditor
         private void Start()
         {
             IYamlParser<Dictionary<string, object>> yamlParser = new YamlDotNetParser();
-            object yamlData = yamlParser.DeSerializeDocumentToClass("C:\\Users\\eilkyam\\Desktop\\ilker2.yaml");
+            object yamlData = yamlParser.DeSerializeDocumentToClass("C:\\Users\\eilkyam\\Desktop\\yamldotnet_generated\\test\\ilker2.yaml");
             IYamlTreeBuilder yamlTreeBuilder = new YamlDotNetTreeBuilder();
             IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
             YamlNode rootYamlNode = yamlTreeBuilder.BuildTree(yamlData);
@@ -62,7 +62,7 @@ namespace EricssonYAMLEditor
             rootNode = new TreeNode();
             rootNode.Name = rootYamlNode.Name;
             rootNode.Text = rootYamlNode.Name;
-            rootNode.Tag = rootYamlNode.Name;
+            rootNode.Tag = rootYamlNode;
             treeView1.Nodes.Add(rootNode);
             AddSubNodes(rootNode, rootYamlNode, contextMenuStripConstructor);
         }
@@ -113,8 +113,8 @@ namespace EricssonYAMLEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            
+            Helper helper = new Helper();
+            helper.test3(((YamlNode)rootNode.Tag).Data);
         }
     }
 }

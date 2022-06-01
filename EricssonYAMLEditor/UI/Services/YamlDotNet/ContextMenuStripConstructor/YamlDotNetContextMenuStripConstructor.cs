@@ -1,4 +1,7 @@
-﻿using EricssonYAMLEditor.UI.Interfaces;
+﻿using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
+using EricssonYAMLEditor.ContentEditor.Services.YamlDotNet;
+using EricssonYAMLEditor.Node.Models;
+using EricssonYAMLEditor.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -72,6 +75,13 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
         private void toolStripMenuItem_Remove_Click(object sender, EventArgs e)
         {
             TreeNode selectedNode = GetSelectedTreeNode(sender);
+            YamlNode yamlNode = (YamlNode)selectedNode.Tag;
+            IContentRemover contentRemover = new YamlDotNetContentRemover();
+            if (contentRemover.RemoveContent(yamlNode))
+            {
+                yamlNode.Remove();
+                selectedNode.Remove();
+            }
         }
 
         private TreeNode GetSelectedTreeNode(object sender)

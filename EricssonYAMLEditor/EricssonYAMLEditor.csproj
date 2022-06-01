@@ -50,6 +50,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentEditor\Services\Interfaces\IContentAdder.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IContentChanger.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IContentRemover.cs" />
+    <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentAdder.cs" />
+    <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentChanger.cs" />
+    <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentRemover.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
