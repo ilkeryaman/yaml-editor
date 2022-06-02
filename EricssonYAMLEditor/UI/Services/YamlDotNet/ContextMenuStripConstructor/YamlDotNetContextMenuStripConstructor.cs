@@ -80,17 +80,10 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
         {
             TreeNode selectedNode = GetSelectedTreeNode(sender);
             YamlNode yamlNode = (YamlNode)selectedNode.Tag;
-            IContentRemover contentRemover = new YamlDotNetContentRemover();
-            if (contentRemover.RemoveContent(yamlNode))
+            if (RemoveDataContent(yamlNode))
             {
-                TreeNode parentNode = selectedNode.Parent;
-                yamlNode.Remove();
-                selectedNode.Remove();
-                if (yamlNode.IsItemOfListNode())
-                {
-                    _treeBuilder.UpdateListNode(yamlNode);
-                    UpdateTreeNodes(parentNode);
-                }
+                RemoveYamlNode(yamlNode);
+                RemoveTreeNode(selectedNode, selectedNode.Parent, yamlNode);
             }
         }
 
@@ -100,6 +93,27 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
             ContextMenuStrip contextMenuStrip = (ContextMenuStrip)toolStripMenuItem.GetCurrentParent();
             TreeView treeview = (TreeView)contextMenuStrip.SourceControl;
             return treeview.SelectedNode;
+        }
+
+        private bool RemoveDataContent(YamlNode yamlNode)
+        {
+            IContentRemover contentRemover = new YamlDotNetContentRemover();
+            return contentRemover.RemoveContent(yamlNode);
+        }
+
+        private void RemoveYamlNode(YamlNode yamlNode)
+        {
+            yamlNode.Remove();
+        }
+
+        private void RemoveTreeNode(TreeNode treeNode, TreeNode parentNode, YamlNode yamlNode)
+        {
+            treeNode.Remove();
+            if (yamlNode.IsItemOfListNode())
+            {
+                _treeBuilder.UpdateListNode(yamlNode);
+                UpdateTreeNodes(parentNode);
+            }
         }
 
         private void UpdateTreeNodes(TreeNode parentNode)
