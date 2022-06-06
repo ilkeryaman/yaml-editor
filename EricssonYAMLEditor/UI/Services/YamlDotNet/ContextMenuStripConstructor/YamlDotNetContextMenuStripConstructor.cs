@@ -91,7 +91,7 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
             }
             else
             {
-                MessageBox.Show(result.Exception.Message, ExceptionMessage.ImplementationError, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                ControlCreator.ShowImplementationError(result.Exception.Message);
             }
         }
 

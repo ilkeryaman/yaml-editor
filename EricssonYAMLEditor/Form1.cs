@@ -47,7 +47,7 @@ namespace EricssonYAMLEditor
             }
             catch(IllegalYamlFileException exc)
             {
-                MessageBox.Show(this, exc.Message, ExceptionMessage.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ControlCreator.ShowExceptionMessage(exc.Message, ExceptionMessage.Error, this);
             }
         }
 
@@ -111,7 +111,7 @@ namespace EricssonYAMLEditor
 
         private void menuItem_Constraints_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, Notification.Constraints.Message, Notification.Constraints.Title, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            ControlCreator.ShowInfoMessage(Notification.Constraints.Message, Notification.Constraints.Title, this);
         }
 
         /// <summary>

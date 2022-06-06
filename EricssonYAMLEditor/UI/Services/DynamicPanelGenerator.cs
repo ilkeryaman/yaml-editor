@@ -67,7 +67,7 @@ namespace EricssonYAMLEditor.UI.Services
                 result = contentChanger.ChangeContent(foundNode, value);
                 if(result.IsSucceded == false)
                 {
-                    MessageBox.Show(result.Exception.Message, ExceptionMessage.ImplementationError, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    ControlCreator.ShowImplementationError(result.Exception.Message);
                     break;
                 }
             }

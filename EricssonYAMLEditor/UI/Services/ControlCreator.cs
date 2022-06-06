@@ -1,4 +1,5 @@
-﻿using EricssonYAMLEditor.UI.Constants;
+﻿using EricssonYAMLEditor.Exception.Constants;
+using EricssonYAMLEditor.UI.Constants;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -64,6 +65,35 @@ namespace EricssonYAMLEditor.UI.Services
             btn.Click += onClick;
             panel.Controls.Add(btn);
             return btn;
+        }
+
+        public static void ShowExceptionMessage(string message, string title, IWin32Window owner = null)
+        {
+            if(owner == null)
+            {
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show(owner, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void ShowImplementationError(string message)
+        {
+            MessageBox.Show(message, ExceptionMessage.ImplementationError, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        }
+
+        public static void ShowInfoMessage(string message, string title, IWin32Window owner = null)
+        {
+            if(owner == null)
+            {
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            else
+            {
+                MessageBox.Show(owner, message, title, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
     }
 }
