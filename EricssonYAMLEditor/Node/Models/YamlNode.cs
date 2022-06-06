@@ -52,8 +52,8 @@ namespace EricssonYAMLEditor.Node.Models
 
         public string GetVisibleName(string name, string parentName)
         {
-            int lengthOfParentName = string.IsNullOrEmpty(parentName) ? 0 : parentName.Length;
-            return name.Substring(lengthOfParentName);
+            int startIndex = string.IsNullOrEmpty(parentName) ? 0 : parentName.Length + 1;
+            return name.Substring(startIndex);
         }
 
         public bool IsItemOfListNode()

@@ -1,4 +1,4 @@
-﻿using EricssonYAMLEditor.UI.Interfaces;
+﻿using EricssonYAMLEditor.UI.Services.Interfaces;
 using EricssonYAMLEditor.UI.Services.YamlDotNet.DynamicControlConstructor;
 using System;
 using System.Collections.Generic;

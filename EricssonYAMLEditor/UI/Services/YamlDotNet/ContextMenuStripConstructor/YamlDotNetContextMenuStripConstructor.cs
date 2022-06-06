@@ -3,7 +3,8 @@ using EricssonYAMLEditor.ContentEditor.Services.YamlDotNet;
 using EricssonYAMLEditor.Node.Models;
 using EricssonYAMLEditor.Node.Services.Interfaces;
 using EricssonYAMLEditor.Node.Services.YamlDotNet;
-using EricssonYAMLEditor.UI.Interfaces;
+using EricssonYAMLEditor.UI.Constants;
+using EricssonYAMLEditor.UI.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
     {
         ContextMenuStrip _contextMenuStripWithAddRemove;
         ContextMenuStrip _contextMenuStripWithRemove;
-        IYamlTreeBuilder _treeBuilder;
+        IYamlTreeBuilder<Dictionary<string, object>> _treeBuilder;
 
         public YamlDotNetContextMenuStripConstructor()
         {
@@ -52,10 +53,10 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
             ToolStripMenuItem toolStripMenuItem_Add = new ToolStripMenuItem();
-            toolStripMenuItem_Add.Text = "Add";
+            toolStripMenuItem_Add.Text = FormConstants.ToolStripMenuItem_Add;
             toolStripMenuItem_Add.Click += new EventHandler(toolStripMenuItem_Add_Click);
             ToolStripMenuItem toolStripMenuItem_Remove = new ToolStripMenuItem();
-            toolStripMenuItem_Remove.Text = "Remove";
+            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem_Remove;
             toolStripMenuItem_Remove.Click += new EventHandler(toolStripMenuItem_Remove_Click);
             contextMenuStrip.Items.AddRange(new ToolStripMenuItem[] { toolStripMenuItem_Add, toolStripMenuItem_Remove });
             return contextMenuStrip;
@@ -65,7 +66,7 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
             ToolStripMenuItem toolStripMenuItem_Remove = new ToolStripMenuItem();
-            toolStripMenuItem_Remove.Text = "Remove";
+            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem_Remove;
             toolStripMenuItem_Remove.Click += new EventHandler(toolStripMenuItem_Remove_Click);
             contextMenuStrip.Items.AddRange(new ToolStripMenuItem[] { toolStripMenuItem_Remove });
             return contextMenuStrip;

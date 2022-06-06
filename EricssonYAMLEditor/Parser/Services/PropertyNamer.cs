@@ -1,4 +1,5 @@
-﻿namespace EricssonYAMLEditor.Parser.Services
+﻿
+namespace EricssonYAMLEditor.Parser.Services
 {
     class PropertyNamer
     {

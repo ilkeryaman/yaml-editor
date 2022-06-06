@@ -1,4 +1,5 @@
-﻿namespace EricssonYAMLEditor.Parser.Services.Interfaces
+﻿
+namespace EricssonYAMLEditor.Parser.Services.Interfaces
 {
     interface IYamlParser<T>
     {

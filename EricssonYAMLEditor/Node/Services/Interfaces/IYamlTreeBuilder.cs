@@ -2,9 +2,9 @@
 
 namespace EricssonYAMLEditor.Node.Services.Interfaces
 {
-    interface IYamlTreeBuilder
+    interface IYamlTreeBuilder<T>
     {
-        YamlNode BuildTree<T>(T yamlData);
+        YamlNode BuildTree(T yamlData);
         void UpdateListNode(YamlNode node);
     }
 }

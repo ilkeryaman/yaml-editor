@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 
 namespace EricssonYAMLEditor.Parser.Services.YamlDotNet
 {
-    class YamlDotNetParser : IYamlParser<Dictionary<string, Object>>
+    class YamlDotNetParser : IYamlParser<Dictionary<string, object>>
     {
         public Dictionary<string, object> DeSerializeDocumentToClass(string filepath)
         {

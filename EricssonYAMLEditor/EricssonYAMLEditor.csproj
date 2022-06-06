@@ -56,18 +56,22 @@
     <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentAdder.cs" />
     <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentChanger.cs" />
     <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentRemover.cs" />
+    <Compile Include="File\Services\Interfaces\IFileSaver.cs" />
+    <Compile Include="File\Services\FileSaver.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper.cs" />
     <Compile Include="Node\Models\YamlNode.cs" />
+    <Compile Include="Node\Services\Interfaces\INodeSearcher.cs" />
     <Compile Include="Node\Services\Interfaces\IYamlTree2DictionaryConverter.cs" />
     <Compile Include="Node\Services\Interfaces\IYamlTreeBuilder.cs" />
+    <Compile Include="Node\Services\NodeSearcher.cs" />
     <Compile Include="Node\Services\YamlDotNet\YamlDotNetTreeBuilder.cs" />
     <Compile Include="Node\Services\YamlTree2DictionaryConverter.cs" />
+    <Compile Include="Parser\Services\Interfaces\ISerializer.cs" />
     <Compile Include="Parser\Services\Interfaces\IYamlParser.cs" />
     <Compile Include="Parser\Services\PropertyNamer.cs" />
     <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetDictionaryParserFactory.cs" />
@@ -77,11 +81,13 @@
     <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetPropertyContentParserFactory.cs" />
     <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetStringKeyValuePairParserFactory.cs" />
     <Compile Include="Parser\Services\YamlDotNet\YamlDotNetParser.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\YamlDotNetSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Interfaces\IContextMenuStripConstructor.cs" />
+    <Compile Include="UI\Constants\FormConstants.cs" />
+    <Compile Include="UI\Services\Interfaces\IContextMenuStripConstructor.cs" />
     <Compile Include="UI\Services\DynamicPanelGenerator.cs" />
-    <Compile Include="UI\Interfaces\IDynamicPanelConstructor.cs" />
+    <Compile Include="UI\Services\Interfaces\IDynamicPanelConstructor.cs" />
     <Compile Include="UI\Services\ControlCreator.cs" />
     <Compile Include="UI\Services\YamlDotNet\ContextMenuStripConstructor\YamlDotNetContextMenuStripConstructor.cs" />
     <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDictionaryDynamicControlConstructorFactory.cs" />

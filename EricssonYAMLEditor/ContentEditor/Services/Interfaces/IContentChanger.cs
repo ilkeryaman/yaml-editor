@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EricssonYAMLEditor.Node.Models;
 
 namespace EricssonYAMLEditor.ContentEditor.Services.Interfaces
 {
     interface IContentChanger
     {
+        void ChangeContent(YamlNode node, string value);
     }
 }

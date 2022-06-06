@@ -1,7 +1,6 @@
-﻿
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace EricssonYAMLEditor.UI.Interfaces
+namespace EricssonYAMLEditor.UI.Services.Interfaces
 {
     interface IContextMenuStripConstructor
     {

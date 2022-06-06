@@ -1,5 +1,5 @@
 ﻿
-namespace EricssonYAMLEditor.UI.Interfaces
+namespace EricssonYAMLEditor.UI.Services.Interfaces
 {
     interface IDynamicPanelConstructor
     {

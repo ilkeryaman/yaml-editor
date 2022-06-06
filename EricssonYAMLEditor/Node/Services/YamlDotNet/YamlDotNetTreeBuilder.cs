@@ -5,16 +5,14 @@ using System.Collections.Generic;
 
 namespace EricssonYAMLEditor.Node.Services.YamlDotNet
 {
-    class YamlDotNetTreeBuilder : IYamlTreeBuilder
+    class YamlDotNetTreeBuilder : IYamlTreeBuilder<Dictionary<string, object>>
     {
-        public YamlNode BuildTree<T>(T yamlData)
+        public YamlNode BuildTree(Dictionary<string, object> yamlData)
         {
-            Dictionary<string, object> data =  yamlData as Dictionary<string, object>;
-
             YamlNode rootYamlNode = new YamlNode(string.Empty);
-            rootYamlNode.Data = data;
+            rootYamlNode.Data = yamlData;
 
-            foreach (KeyValuePair<string, object> property in data)
+            foreach (KeyValuePair<string, object> property in yamlData)
             {
                 string currentPropertyName = property.Key;
                 ProcessNode(currentPropertyName, property, rootYamlNode);

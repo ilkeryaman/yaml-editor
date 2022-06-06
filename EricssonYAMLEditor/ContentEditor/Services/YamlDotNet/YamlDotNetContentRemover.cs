@@ -14,12 +14,12 @@ namespace EricssonYAMLEditor.ContentEditor.Services.YamlDotNet
             if(data is Dictionary<object, object>)
             {
                 Dictionary<object, object> dict = (Dictionary<object, object>) data;
-                return RemoveDataFromDictionary<object>(dict, node);
+                return RemoveDataFromDictionary(dict, node);
             }
             else if(data is Dictionary<string, object>)
             {
                 Dictionary<string, object> dict = (Dictionary<string, object>)data;
-                return RemoveDataFromDictionary<string>(dict, node);
+                return RemoveDataFromDictionary(dict, node);
             }
             else if(data is KeyValuePair<object, object>)
             {
@@ -61,7 +61,6 @@ namespace EricssonYAMLEditor.ContentEditor.Services.YamlDotNet
             if (kvpValue is Dictionary<object, object>)
             {
                 Dictionary<object, object> dict = (Dictionary<object, object>)kvpValue;
-                //dict.Remove()
                 if (dataToRemove is KeyValuePair<object, object>)
                 {
                     KeyValuePair<object, object> kvpData2Remove = (KeyValuePair<object, object>) dataToRemove;

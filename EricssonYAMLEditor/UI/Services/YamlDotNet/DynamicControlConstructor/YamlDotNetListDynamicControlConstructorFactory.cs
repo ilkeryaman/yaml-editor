@@ -20,8 +20,8 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.DynamicControlConstructor
             for (int i = 0; i < _data.Count; i++)
             {
                 object item = _data[i];
-                /// It is difficult to manage list objects when render it recursively, so there should be a constraint here to show when clicked from first level parent
-                /// When first level parent clicked, component will be shown; when upper level parents are clicked, it will not be shown.
+                /// It is difficult to manage list objects while rendering it recursively, so there should be a constraint here to show when only clicked from
+                /// first level parent. When first level parent clicked, component will be shown; when upper level parents are clicked, it will not be shown.
                 if (isFromFirstLevelParent && item is string)
                 {
                     _dynamicPanelConstructor.ConstructDynamicPanel(PropertyNamer.GetArrayItemPropertyName(key, i), item);

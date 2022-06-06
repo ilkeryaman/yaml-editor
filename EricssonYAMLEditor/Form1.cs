@@ -1,10 +1,13 @@
-﻿using EricssonYAMLEditor.Node.Models;
+﻿using EricssonYAMLEditor.File.Services.Interfaces;
+using EricssonYAMLEditor.File.Services;
+using EricssonYAMLEditor.Node.Models;
 using EricssonYAMLEditor.Node.Services;
 using EricssonYAMLEditor.Node.Services.Interfaces;
 using EricssonYAMLEditor.Node.Services.YamlDotNet;
 using EricssonYAMLEditor.Parser.Services.Interfaces;
 using EricssonYAMLEditor.Parser.Services.YamlDotNet;
-using EricssonYAMLEditor.UI.Interfaces;
+using EricssonYAMLEditor.UI.Constants;
+using EricssonYAMLEditor.UI.Services.Interfaces;
 using EricssonYAMLEditor.UI.Services;
 using EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor;
 using System;
@@ -26,34 +29,18 @@ namespace EricssonYAMLEditor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Start();
-            //Start2();
+
         }
 
-        private void Start2()
-        {
-            Helper h = new Helper();
-            h.test();
-        }
-
-        private void Start()
+        private void ReadAndProcess(string filePath)
         {
             IYamlParser<Dictionary<string, object>> yamlParser = new YamlDotNetParser();
-            object yamlData = yamlParser.DeSerializeDocumentToClass("C:\\Users\\eilkyam\\Desktop\\yamldotnet_generated\\test\\ilker2.yaml");
-            IYamlTreeBuilder yamlTreeBuilder = new YamlDotNetTreeBuilder();
+            Dictionary<string, object> yamlData = yamlParser.DeSerializeDocumentToClass(filePath);
+            IYamlTreeBuilder<Dictionary<string, object>> yamlTreeBuilder = new YamlDotNetTreeBuilder();
             IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
             YamlNode rootYamlNode = yamlTreeBuilder.BuildTree(yamlData);
             RenderTreeView(rootYamlNode);
             yamlNodeDictionary = tree2dictionaryConverter.Convert(rootYamlNode);
-        }
-
-        private void changeIt(object yamlData)
-        {
-            Dictionary<string, object> a = (Dictionary<string, object>)yamlData;
-            object kubernetes;
-            a.TryGetValue("kubernetes", out kubernetes);
-            Dictionary<object, object> kubernetes2 = (Dictionary<object, object>)kubernetes;
-            kubernetes2["ip_version"] = 52222;
         }
 
         private void RenderTreeView(YamlNode rootYamlNode)
@@ -79,6 +66,39 @@ namespace EricssonYAMLEditor
                 parentTreeNode.Nodes.Add(treeNode);
                 AddSubNodes(treeNode, node, contextMenuStripConstructor);
             }
+        }
+
+        #region Events
+
+        private void menuItem_OpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = FormConstants.File_Filter_Text;
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                menuItem_SaveFile.Enabled = true;
+                string filePath = file.FileName;
+                ReadAndProcess(filePath);
+            }
+        }
+
+        private void menuItem_SaveFile_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.DefaultExt = "yaml";
+            saveFileDialog1.Filter = FormConstants.File_Filter_Text;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog1.FileName;
+                ISerializer serializer = new YamlDotNetSerializer();
+                IFileSaver<string> fileSaver = new FileSaver();
+                fileSaver.Save(filePath, serializer.Serialize(((YamlNode)rootNode.Tag).Data));
+            }
+        }
+
+        private void menuItem_Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         /// <summary>
@@ -111,10 +131,6 @@ namespace EricssonYAMLEditor
             catch { }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Helper helper = new Helper();
-            helper.test3(((YamlNode)rootNode.Tag).Data);
-        }
+        #endregion Events
     }
 }
