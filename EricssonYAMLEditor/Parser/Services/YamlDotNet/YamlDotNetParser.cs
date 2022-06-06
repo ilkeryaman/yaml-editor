@@ -1,7 +1,8 @@
-﻿using EricssonYAMLEditor.Parser.Services.Interfaces;
-using System;
+﻿using EricssonYAMLEditor.Exception.Model;
+using EricssonYAMLEditor.Parser.Services.Interfaces;
 using System.Collections.Generic;
 using System.IO;
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace EricssonYAMLEditor.Parser.Services.YamlDotNet
@@ -10,8 +11,20 @@ namespace EricssonYAMLEditor.Parser.Services.YamlDotNet
     {
         public Dictionary<string, object> DeSerializeDocumentToClass(string filepath)
         {
-            var deserializer = new Deserializer();
-            return deserializer.Deserialize<Dictionary<string, Object>>(new StreamReader(filepath));
+            try
+            {
+                var deserializer = new Deserializer();
+                Dictionary<string, object> dict = deserializer.Deserialize<Dictionary<string, object>>(new StreamReader(filepath));
+                if(dict == null)
+                {
+                    throw new IllegalYamlFileException();
+                }
+                return dict;
+            }
+            catch (YamlException)
+            {
+                throw new IllegalYamlFileException();
+            }
         }
     }
 }

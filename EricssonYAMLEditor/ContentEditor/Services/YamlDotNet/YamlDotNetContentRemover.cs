@@ -1,4 +1,6 @@
-﻿using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
+﻿using EricssonYAMLEditor.ContentEditor.Model;
+using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
+using EricssonYAMLEditor.Exception.Constants;
 using EricssonYAMLEditor.Node.Models;
 using System.Collections.Generic;
 
@@ -6,7 +8,7 @@ namespace EricssonYAMLEditor.ContentEditor.Services.YamlDotNet
 {
     class YamlDotNetContentRemover : IContentRemover
     {
-        public bool RemoveContent(YamlNode node)
+        public ContentEditorResult RemoveContent(YamlNode node)
         {
             object data = node.ParentNode.Data;
             object dataToRemove = node.Data;
@@ -14,26 +16,28 @@ namespace EricssonYAMLEditor.ContentEditor.Services.YamlDotNet
             if(data is Dictionary<object, object>)
             {
                 Dictionary<object, object> dict = (Dictionary<object, object>) data;
-                return RemoveDataFromDictionary(dict, node);
+                bool isContentRemoved = RemoveDataFromDictionary(dict, node);
+                return GenerateResult(RemoveDataFromDictionary(dict, node), node.Name);
             }
             else if(data is Dictionary<string, object>)
             {
                 Dictionary<string, object> dict = (Dictionary<string, object>)data;
-                return RemoveDataFromDictionary(dict, node);
+                return GenerateResult(RemoveDataFromDictionary(dict, node), node.Name);
+                
             }
             else if(data is KeyValuePair<object, object>)
             {
                 KeyValuePair<object, object> kvpData = (KeyValuePair<object, object>) data;
-                return RemoveDataFromValueOfKeyValuePair(kvpData.Value, dataToRemove, node);
+                return GenerateResult(RemoveDataFromValueOfKeyValuePair(kvpData.Value, dataToRemove, node), node.Name);
             }
             else if(data is KeyValuePair<string, object>)
             {
                 KeyValuePair<string, object> kvpData = (KeyValuePair<string, object>) data;
-                return RemoveDataFromValueOfKeyValuePair(kvpData.Value, dataToRemove, node);
+                return GenerateResult(RemoveDataFromValueOfKeyValuePair(kvpData.Value, dataToRemove, node), node.Name);
             }
             else
             {
-                return false;
+                return GenerateResult(false, node.Name);
             }
         }
 
@@ -75,6 +79,12 @@ namespace EricssonYAMLEditor.ContentEditor.Services.YamlDotNet
                 isContentRemoved = true;
             }
             return isContentRemoved;
+        }
+
+        private ContentEditorResult GenerateResult(bool isSuccess, string propertyName)
+        {
+            ContentEditorResult result = new ContentEditorResult();
+            return isSuccess ? result : result.SetException(string.Format(ExceptionMessage.Not_Removed_Content, propertyName));
         }
     }
 }

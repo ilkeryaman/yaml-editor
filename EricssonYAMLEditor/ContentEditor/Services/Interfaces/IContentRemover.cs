@@ -1,9 +1,10 @@
-﻿using EricssonYAMLEditor.Node.Models;
+﻿using EricssonYAMLEditor.ContentEditor.Model;
+using EricssonYAMLEditor.Node.Models;
 
 namespace EricssonYAMLEditor.ContentEditor.Services.Interfaces
 {
     interface IContentRemover
     {
-        bool RemoveContent(YamlNode node);
+        ContentEditorResult RemoveContent(YamlNode node);
     }
 }

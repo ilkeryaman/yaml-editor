@@ -35,6 +35,8 @@ namespace EricssonYAMLEditor
             this.menuItem_SaveFile = new System.Windows.Forms.MenuItem();
             this.menuItem_HorizontalLine = new System.Windows.Forms.MenuItem();
             this.menuItem_Exit = new System.Windows.Forms.MenuItem();
+            this.menuItem_About = new System.Windows.Forms.MenuItem();
+            this.menuItem_Constraints = new System.Windows.Forms.MenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
@@ -74,6 +76,18 @@ namespace EricssonYAMLEditor
             this.menuItem_Exit.Text = "Exit";
             this.menuItem_Exit.Click += new System.EventHandler(this.menuItem_Exit_Click);
             // 
+            // menuItem_About
+            // 
+            this.menuItem_About.Index = 1;
+            this.menuItem_About.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {this.menuItem_Constraints});
+            this.menuItem_About.Text = "About";
+            // 
+            // menuItem_Constraints
+            // 
+            this.menuItem_Constraints.Index = 0;
+            this.menuItem_Constraints.Text = "Constraints...";
+            this.menuItem_Constraints.Click += new System.EventHandler(this.menuItem_Constraints_Click);
+            // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(17, 16);
@@ -108,7 +122,7 @@ namespace EricssonYAMLEditor
             this.Text = "Yaml Editor GUI";
             this.MaximizeBox = false;
             this.Menu = new System.Windows.Forms.MainMenu();
-            this.Menu.MenuItems.Add(menuItem_File);
+            this.Menu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] { menuItem_File, menuItem_About });
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
@@ -123,6 +137,8 @@ namespace EricssonYAMLEditor
         private System.Windows.Forms.MenuItem menuItem_SaveFile;
         private System.Windows.Forms.MenuItem menuItem_HorizontalLine;
         private System.Windows.Forms.MenuItem menuItem_Exit;
+        private System.Windows.Forms.MenuItem menuItem_About;
+        private System.Windows.Forms.MenuItem menuItem_Constraints;
     }
 }
 

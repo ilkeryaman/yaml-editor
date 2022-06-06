@@ -14,7 +14,7 @@ namespace EricssonYAMLEditor.UI.Services
         public static Label CreateLabel(FlowLayoutPanel panel, string key, string text, Color foreColor)
         {
             Label lbl = new Label();
-            lbl.Name = FormConstants.Label_Name_Prefix + key;
+            lbl.Name = FormConstants.Prefix.Label_Name + key;
             lbl.Text = text;
             lbl.Size = new Size(700, 15);
             lbl.Margin = new Padding(3, 10, 3, 0);
@@ -28,7 +28,7 @@ namespace EricssonYAMLEditor.UI.Services
             CreateLabel(panel, key, key);
 
             TextBox txtBox = new TextBox();
-            txtBox.Name = FormConstants.TextBox_Name_Prefix + key;
+            txtBox.Name = FormConstants.Prefix.TextBox_Name + key;
             txtBox.Text = value;
             txtBox.Tag = key;
             txtBox.Size = new Size(700, 20);
@@ -42,7 +42,7 @@ namespace EricssonYAMLEditor.UI.Services
             CreateLabel(panel, key, key);
 
             TextBox txtArea = new TextBox();
-            txtArea.Name = FormConstants.TextArea_Name_Prefix + key;
+            txtArea.Name = FormConstants.Prefix.TextArea_Name + key;
             txtArea.Text = string.IsNullOrEmpty(value) ? value : value.Replace("\n", "\r\n");
             txtArea.Tag = key;
             txtArea.Multiline = true;
@@ -56,7 +56,7 @@ namespace EricssonYAMLEditor.UI.Services
         public static Button CreateButton(FlowLayoutPanel panel, string name, string text, System.EventHandler onClick)
         {
             Button btn = new Button();
-            btn.Name = FormConstants.Button_Name_Prefix + name;
+            btn.Name = FormConstants.Prefix.Button_Name + name;
             btn.Size = new Size(75, 25);
             btn.Text = text;
             btn.UseVisualStyleBackColor = true;

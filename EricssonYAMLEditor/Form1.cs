@@ -1,7 +1,6 @@
 ﻿using EricssonYAMLEditor.File.Services.Interfaces;
 using EricssonYAMLEditor.File.Services;
 using EricssonYAMLEditor.Node.Models;
-using EricssonYAMLEditor.Node.Services;
 using EricssonYAMLEditor.Node.Services.Interfaces;
 using EricssonYAMLEditor.Node.Services.YamlDotNet;
 using EricssonYAMLEditor.Parser.Services.Interfaces;
@@ -13,13 +12,15 @@ using EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using EricssonYAMLEditor.Exception.Constants;
+using EricssonYAMLEditor.Exception.Model;
 
 namespace EricssonYAMLEditor
 {
     public partial class Form1 : Form
     {
         TreeNode rootNode;
-        Dictionary<string, object> yamlNodeDictionary;
+        //Dictionary<string, object> yamlNodeDictionary;
 
         public Form1()
         {
@@ -34,13 +35,20 @@ namespace EricssonYAMLEditor
 
         private void ReadAndProcess(string filePath)
         {
-            IYamlParser<Dictionary<string, object>> yamlParser = new YamlDotNetParser();
-            Dictionary<string, object> yamlData = yamlParser.DeSerializeDocumentToClass(filePath);
-            IYamlTreeBuilder<Dictionary<string, object>> yamlTreeBuilder = new YamlDotNetTreeBuilder();
-            IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
-            YamlNode rootYamlNode = yamlTreeBuilder.BuildTree(yamlData);
-            RenderTreeView(rootYamlNode);
-            yamlNodeDictionary = tree2dictionaryConverter.Convert(rootYamlNode);
+            try
+            {
+                IYamlParser<Dictionary<string, object>> yamlParser = new YamlDotNetParser();
+                Dictionary<string, object> yamlData = yamlParser.DeSerializeDocumentToClass(filePath);
+                IYamlTreeBuilder<Dictionary<string, object>> yamlTreeBuilder = new YamlDotNetTreeBuilder();
+                //IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
+                YamlNode rootYamlNode = yamlTreeBuilder.BuildTree(yamlData);
+                RenderTreeView(rootYamlNode);
+                //yamlNodeDictionary = tree2dictionaryConverter.Convert(rootYamlNode);
+            }
+            catch(IllegalYamlFileException exc)
+            {
+                MessageBox.Show(this, exc.Message, ExceptionMessage.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void RenderTreeView(YamlNode rootYamlNode)
@@ -99,6 +107,11 @@ namespace EricssonYAMLEditor
         private void menuItem_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void menuItem_Constraints_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this, Notification.Constraints.Message, Notification.Constraints.Title, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         /// <summary>

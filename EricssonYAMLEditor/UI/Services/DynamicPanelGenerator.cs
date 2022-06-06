@@ -1,5 +1,7 @@
-﻿using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
+﻿using EricssonYAMLEditor.ContentEditor.Model;
+using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
 using EricssonYAMLEditor.ContentEditor.Services.YamlDotNet;
+using EricssonYAMLEditor.Exception.Constants;
 using EricssonYAMLEditor.Node.Models;
 using EricssonYAMLEditor.Node.Services;
 using EricssonYAMLEditor.Node.Services.Interfaces;
@@ -44,7 +46,7 @@ namespace EricssonYAMLEditor.UI.Services
         {
             if (HasTextBox())
             {
-                ControlCreator.CreateButton(_panel, FormConstants.Button_Set_Name, FormConstants.Button_Set_Text, 
+                ControlCreator.CreateButton(_panel, FormConstants.Button.Set.Name, FormConstants.Button.Set.Text, 
                     (sender, e) => onClickSetButton(sender, e));
             }
         }
@@ -55,13 +57,19 @@ namespace EricssonYAMLEditor.UI.Services
             YamlNode rootNode = (YamlNode) treeView.Nodes[0].Tag;
             INodeSearcher nodeSearcher = new NodeSearcher();
             IContentChanger contentChanger = new YamlDotNetContentChanger();
-            
+
+            ContentEditorResult result = new ContentEditorResult();
             foreach (TextBox textBox in GetTextBoxes())
             {
                 string propertyName = Convert.ToString(textBox.Tag);
                 string value = textBox.Text;
                 YamlNode foundNode = nodeSearcher.SearchNode(rootNode, propertyName);
-                contentChanger.ChangeContent(foundNode, value);
+                result = contentChanger.ChangeContent(foundNode, value);
+                if(result.IsSucceded == false)
+                {
+                    MessageBox.Show(result.Exception.Message, ExceptionMessage.ImplementationError, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    break;
+                }
             }
         }
 

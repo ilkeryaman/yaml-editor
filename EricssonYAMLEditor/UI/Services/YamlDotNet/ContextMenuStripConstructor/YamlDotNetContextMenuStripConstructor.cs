@@ -1,5 +1,7 @@
-﻿using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
+﻿using EricssonYAMLEditor.ContentEditor.Model;
+using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
 using EricssonYAMLEditor.ContentEditor.Services.YamlDotNet;
+using EricssonYAMLEditor.Exception.Constants;
 using EricssonYAMLEditor.Node.Models;
 using EricssonYAMLEditor.Node.Services.Interfaces;
 using EricssonYAMLEditor.Node.Services.YamlDotNet;
@@ -53,10 +55,10 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
             ToolStripMenuItem toolStripMenuItem_Add = new ToolStripMenuItem();
-            toolStripMenuItem_Add.Text = FormConstants.ToolStripMenuItem_Add;
+            toolStripMenuItem_Add.Text = FormConstants.ToolStripMenuItem.Add.Text;
             toolStripMenuItem_Add.Click += new EventHandler(toolStripMenuItem_Add_Click);
             ToolStripMenuItem toolStripMenuItem_Remove = new ToolStripMenuItem();
-            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem_Remove;
+            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem.Remove.Text;
             toolStripMenuItem_Remove.Click += new EventHandler(toolStripMenuItem_Remove_Click);
             contextMenuStrip.Items.AddRange(new ToolStripMenuItem[] { toolStripMenuItem_Add, toolStripMenuItem_Remove });
             return contextMenuStrip;
@@ -66,7 +68,7 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
             ToolStripMenuItem toolStripMenuItem_Remove = new ToolStripMenuItem();
-            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem_Remove;
+            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem.Remove.Text;
             toolStripMenuItem_Remove.Click += new EventHandler(toolStripMenuItem_Remove_Click);
             contextMenuStrip.Items.AddRange(new ToolStripMenuItem[] { toolStripMenuItem_Remove });
             return contextMenuStrip;
@@ -81,10 +83,15 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
         {
             TreeNode selectedNode = GetSelectedTreeNode(sender);
             YamlNode yamlNode = (YamlNode)selectedNode.Tag;
-            if (RemoveDataContent(yamlNode))
+            ContentEditorResult result = RemoveDataContent(yamlNode);
+            if (result.IsSucceded)
             {
                 RemoveYamlNode(yamlNode);
                 RemoveTreeNode(selectedNode, selectedNode.Parent, yamlNode);
+            }
+            else
+            {
+                MessageBox.Show(result.Exception.Message, ExceptionMessage.ImplementationError, MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
 
@@ -96,7 +103,7 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
             return treeview.SelectedNode;
         }
 
-        private bool RemoveDataContent(YamlNode yamlNode)
+        private ContentEditorResult RemoveDataContent(YamlNode yamlNode)
         {
             IContentRemover contentRemover = new YamlDotNetContentRemover();
             return contentRemover.RemoveContent(yamlNode);
