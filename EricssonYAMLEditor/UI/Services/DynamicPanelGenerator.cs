@@ -75,18 +75,34 @@ namespace EricssonYAMLEditor.UI.Services
                 
                 YamlNode foundNode = nodeSearcher.SearchNode(rootNode, propertyName);
                 result = contentChanger.ChangeContent(foundNode, value);
-                if(result.IsSucceded == false)
+                if (result.IsSucceded == false)
                 {
-                    if(result.Exception is ValidationException)
+                    if (result.Exception is ValidationException)
                     {
                         ControlCreator.ShowExceptionMessage(result.Exception.Message, ExceptionMessage.Error);
                     }
-                    else 
+                    else
                     {
                         ControlCreator.ShowImplementationError(result.Exception.Message);
                     }
                     break;
                 }
+            }
+
+            ManageResultLabel(result);
+        }
+
+        private void ManageResultLabel(ContentEditorResult result)
+        {
+            string key = FormConstants.Prefix.Label_Name + FormConstants.Label.ValueSet.Name;
+            if (_panel.Controls.ContainsKey(key))
+            {
+                _panel.Controls.RemoveByKey(key);
+            }
+
+            if (result.IsSucceded)
+            {
+                ControlCreator.CreateLabel(_panel, FormConstants.Label.ValueSet.Name, FormConstants.Label.ValueSet.Text, Color.Green);
             }
         }
 

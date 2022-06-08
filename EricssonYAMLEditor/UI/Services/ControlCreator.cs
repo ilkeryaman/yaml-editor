@@ -8,15 +8,15 @@ namespace EricssonYAMLEditor.UI.Services
 {
     class ControlCreator
     {
-        public static Label CreateLabel(FlowLayoutPanel panel, string key, string text)
+        public static Label CreateLabel(FlowLayoutPanel panel, string name, string text)
         {
-            return CreateLabel(panel, key, text, Color.Black);
+            return CreateLabel(panel, name, text, Color.Black);
         }
 
-        public static Label CreateLabel(FlowLayoutPanel panel, string key, string text, Color foreColor)
+        public static Label CreateLabel(FlowLayoutPanel panel, string name, string text, Color foreColor)
         {
             Label lbl = new Label();
-            lbl.Name = FormConstants.Prefix.Label_Name + key;
+            lbl.Name = FormConstants.Prefix.Label_Name + name;
             lbl.Text = text;
             lbl.Size = new Size(700, 15);
             lbl.Margin = new Padding(3, 10, 3, 0);

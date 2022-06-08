@@ -29,6 +29,15 @@ namespace EricssonYAMLEditor.UI.Constants
             }
         }
 
+        public struct Label
+        {
+            public struct ValueSet
+            {
+                public const string Name = "ValueSet";
+                public const string Text = "Value Set.";
+            }
+        }
+
         public struct Button
         {
             public struct Set
