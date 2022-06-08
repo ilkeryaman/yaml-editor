@@ -51,15 +51,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentEditor\Model\ContentEditorResult.cs" />
+    <Compile Include="ContentEditor\Services\ContentValidator.cs" />
     <Compile Include="ContentEditor\Services\Interfaces\IContentAdder.cs" />
     <Compile Include="ContentEditor\Services\Interfaces\IContentChanger.cs" />
     <Compile Include="ContentEditor\Services\Interfaces\IContentRemover.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IContentValidator.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IValidatorFactory.cs" />
+    <Compile Include="ContentEditor\Services\Validator\IPValidatorFactory.cs" />
+    <Compile Include="ContentEditor\Services\Validator\WhiteSpaceValidatorFactory.cs" />
     <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentAdder.cs" />
     <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentChanger.cs" />
     <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentRemover.cs" />
     <Compile Include="Exception\Constants\ExceptionMessage.cs" />
     <Compile Include="Exception\Model\IllegalYamlFileException.cs" />
     <Compile Include="Exception\Model\ImplementationException.cs" />
+    <Compile Include="Exception\Model\ValidationException.cs" />
     <Compile Include="File\Services\Interfaces\IFileSaver.cs" />
     <Compile Include="File\Services\FileSaver.cs" />
     <Compile Include="Form1.cs">
@@ -68,6 +74,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Node\Constants\PropertyKey.cs" />
     <Compile Include="Node\Models\YamlNode.cs" />
     <Compile Include="Node\Services\Interfaces\INodeSearcher.cs" />
     <Compile Include="Node\Services\Interfaces\IYamlTree2DictionaryConverter.cs" />
@@ -90,10 +97,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Constants\FormConstants.cs" />
     <Compile Include="UI\Constants\Notification.cs" />
+    <Compile Include="UI\Services\ComboBoxReferenceMapService.cs" />
     <Compile Include="UI\Services\Interfaces\IContextMenuStripConstructor.cs" />
     <Compile Include="UI\Services\DynamicPanelGenerator.cs" />
     <Compile Include="UI\Services\Interfaces\IDynamicPanelConstructor.cs" />
     <Compile Include="UI\Services\ControlCreator.cs" />
+    <Compile Include="UI\Services\PageManager.cs" />
     <Compile Include="UI\Services\YamlDotNet\ContextMenuStripConstructor\YamlDotNetContextMenuStripConstructor.cs" />
     <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDictionaryDynamicControlConstructorFactory.cs" />
     <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDynamicControlConstructorFactory.cs" />

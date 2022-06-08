@@ -1,4 +1,6 @@
 ﻿
+using EricssonYAMLEditor.Node.Constants;
+
 namespace EricssonYAMLEditor.UI.Constants
 {
     struct FormConstants
@@ -11,6 +13,7 @@ namespace EricssonYAMLEditor.UI.Constants
             public const string TextBox_Name = "txtBox_";
             public const string TextArea_Name = "txtArea_";
             public const string Button_Name = "btn_";
+            public const string ComboBox_Name = "comboBox_";
         }
 
         public struct ToolStripMenuItem
@@ -32,6 +35,26 @@ namespace EricssonYAMLEditor.UI.Constants
             {
                 public const string Name = "Set";
                 public const string Text = "Set Value(s)";
+            }
+
+            public struct Prev
+            {
+                public struct Name
+                {
+                    public const string Empty = "<<";
+                    public const string Networks = "<< " + PropertyKey.FullName.networks;
+                    public const string ControlPlane = "<< " + PropertyKey.FullName.controlplane;
+                }
+            }
+
+            public struct Next
+            {
+                public struct Name
+                {
+                    public const string Empty = ">>";
+                    public const string ControlPlane = ">> " + PropertyKey.FullName.controlplane;
+                    public const string WorkerPools = ">> " + PropertyKey.FullName.worker_pools;
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ namespace EricssonYAMLEditor.Node.Services
         {
             string[] propertyNameTree = string.IsNullOrEmpty(parentNode.Name) 
                 ? searchText.Split(_dot)
-                : searchText.Replace(parentNode.Name, string.Empty).Split(_dot);
+                : searchText.Replace(parentNode.Name + ".", string.Empty).Split(_dot);
 
             YamlNode foundNode = parentNode;
 
@@ -25,11 +25,20 @@ namespace EricssonYAMLEditor.Node.Services
                     string parentPropertyName = Regex.Replace(propertyName, _regexPattern, string.Empty);
                     string parentNodeName = parentNode.Name;
                     foundNode = FindSubNode(foundNode, parentPropertyName);
+                    if(foundNode == null)
+                    {
+                        return null;
+                    }
                     foundNode = FindSubNode(foundNode, regexMatch.Value, true);
                 }
                 else
                 {
                     foundNode = FindSubNode(foundNode, propertyName);
+                }
+
+                if (foundNode == null)
+                {
+                    return null;
                 }
             }
 

@@ -1,6 +1,7 @@
 ﻿using EricssonYAMLEditor.ContentEditor.Model;
 using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
 using EricssonYAMLEditor.Exception.Constants;
+using EricssonYAMLEditor.Exception.Model;
 using EricssonYAMLEditor.Node.Models;
 using System.Collections.Generic;
 
@@ -84,7 +85,7 @@ namespace EricssonYAMLEditor.ContentEditor.Services.YamlDotNet
         private ContentEditorResult GenerateResult(bool isSuccess, string propertyName)
         {
             ContentEditorResult result = new ContentEditorResult();
-            return isSuccess ? result : result.SetException(string.Format(ExceptionMessage.Not_Removed_Content, propertyName));
+            return isSuccess ? result : result.SetException(new ImplementationException(string.Format(ExceptionMessage.Not_Removed_Content, propertyName)));
         }
     }
 }

@@ -2,6 +2,7 @@
 using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
 using EricssonYAMLEditor.ContentEditor.Services.YamlDotNet;
 using EricssonYAMLEditor.Exception.Constants;
+using EricssonYAMLEditor.Exception.Model;
 using EricssonYAMLEditor.Node.Models;
 using EricssonYAMLEditor.Node.Services;
 using EricssonYAMLEditor.Node.Services.Interfaces;
@@ -44,7 +45,7 @@ namespace EricssonYAMLEditor.UI.Services
 
         private void CreateSetButton()
         {
-            if (HasTextBox())
+            if (HasEditableControl())
             {
                 ControlCreator.CreateButton(_panel, FormConstants.Button.Set.Name, FormConstants.Button.Set.Text, 
                     (sender, e) => onClickSetButton(sender, e));
@@ -54,30 +55,46 @@ namespace EricssonYAMLEditor.UI.Services
         private void onClickSetButton(object sender, EventArgs e)
         {
             TreeView treeView = (TreeView) _panel.Tag;
-            YamlNode rootNode = (YamlNode) treeView.Nodes[0].Tag;
+            YamlNode rootNode = (YamlNode) treeView.Tag;
             INodeSearcher nodeSearcher = new NodeSearcher();
             IContentChanger contentChanger = new YamlDotNetContentChanger();
 
             ContentEditorResult result = new ContentEditorResult();
-            foreach (TextBox textBox in GetTextBoxes())
+            foreach (Control control in GetEditableControls())
             {
-                string propertyName = Convert.ToString(textBox.Tag);
-                string value = textBox.Text;
+                string propertyName = Convert.ToString(control.Tag);
+                string value = string.Empty;
+                if (control is TextBox)
+                {
+                    value = ((TextBox) control).Text;
+                }
+                else if (control is ComboBox)
+                {
+                    value = Convert.ToString(((ComboBox)control).SelectedItem);
+                }
+                
                 YamlNode foundNode = nodeSearcher.SearchNode(rootNode, propertyName);
                 result = contentChanger.ChangeContent(foundNode, value);
                 if(result.IsSucceded == false)
                 {
-                    ControlCreator.ShowImplementationError(result.Exception.Message);
+                    if(result.Exception is ValidationException)
+                    {
+                        ControlCreator.ShowExceptionMessage(result.Exception.Message, ExceptionMessage.Error);
+                    }
+                    else 
+                    {
+                        ControlCreator.ShowImplementationError(result.Exception.Message);
+                    }
                     break;
                 }
             }
         }
 
-        private bool HasTextBox()
+        private bool HasEditableControl()
         {
             foreach (Control control in _panel.Controls)
             {
-                if (control is TextBox)
+                if (control is TextBox || control is ComboBox)
                 {
                     return true;
                 }
@@ -85,17 +102,21 @@ namespace EricssonYAMLEditor.UI.Services
             return false;
         }
 
-        private List<TextBox> GetTextBoxes()
+        private List<Control> GetEditableControls()
         {
-            List<TextBox> textBoxList = new List<TextBox>();
+            List<Control> controlList = new List<Control>();
             foreach (Control control in _panel.Controls)
             {
                 if (control is TextBox)
                 {
-                    textBoxList.Add((TextBox)control);
+                    controlList.Add((TextBox)control);
+                }
+                else if (control is ComboBox)
+                {
+                    controlList.Add((ComboBox)control);
                 }
             }
-            return textBoxList;
+            return controlList;
         }
     }
 }

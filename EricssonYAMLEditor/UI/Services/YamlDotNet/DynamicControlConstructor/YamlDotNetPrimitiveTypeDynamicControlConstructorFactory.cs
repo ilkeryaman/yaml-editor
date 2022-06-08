@@ -1,4 +1,6 @@
-﻿
+﻿using EricssonYAMLEditor.Node.Models;
+using System.Windows.Forms;
+
 namespace EricssonYAMLEditor.UI.Services.YamlDotNet.DynamicControlConstructor
 {
     class YamlDotNetPrimitiveTypeDynamicControlConstructorFactory : YamlDotNetDynamicControlConstructorFactory
@@ -13,7 +15,12 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.DynamicControlConstructor
 
         public override void ConstructDynamicControl(string key, bool isFromFirstLevelParent = false)
         {
-            if (_data.Contains("\n"))
+            if (ComboBoxReferenceMapService.IsComboBoxProperty(key))
+            {
+                TreeView treeView = (TreeView) _dynamicPanelConstructor.Panel.Tag;
+                ControlCreator.CreateComboBox(_dynamicPanelConstructor.Panel, key, ComboBoxReferenceMapService.GetComboBoxData(key, (YamlNode)treeView.Tag), _data);
+            }
+            else if (_data.Contains("\n"))
             {
                 ControlCreator.CreateTextArea(_dynamicPanelConstructor.Panel, key, _data);
             }

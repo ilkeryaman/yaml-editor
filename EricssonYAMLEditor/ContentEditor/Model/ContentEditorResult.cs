@@ -1,11 +1,12 @@
 ﻿using EricssonYAMLEditor.Exception.Model;
+using System;
 
 namespace EricssonYAMLEditor.ContentEditor.Model
 {
     class ContentEditorResult
     {
         private bool _isSucceded;
-        private ImplementationException _exception;
+        private ApplicationException _exception;
 
         public ContentEditorResult()
         {
@@ -18,15 +19,15 @@ namespace EricssonYAMLEditor.ContentEditor.Model
             get { return _isSucceded; }
         }
 
-        public ImplementationException Exception
+        public ApplicationException Exception
         {
             get { return _exception; }
         }
 
-        public ContentEditorResult SetException(string message)
+        public ContentEditorResult SetException(ApplicationException exception)
         {
             _isSucceded = false;
-            _exception = new ImplementationException(message);
+            _exception = exception;
             return this;
         }
     }

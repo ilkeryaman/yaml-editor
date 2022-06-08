@@ -1,5 +1,6 @@
 ﻿using EricssonYAMLEditor.Exception.Constants;
 using EricssonYAMLEditor.UI.Constants;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -24,28 +25,28 @@ namespace EricssonYAMLEditor.UI.Services
             return lbl;
         }
 
-        public static TextBox CreateTextBox(FlowLayoutPanel panel, string key, string value)
+        public static TextBox CreateTextBox(FlowLayoutPanel panel, string name, string value)
         {
-            CreateLabel(panel, key, key);
+            CreateLabel(panel, name, name);
 
             TextBox txtBox = new TextBox();
-            txtBox.Name = FormConstants.Prefix.TextBox_Name + key;
+            txtBox.Name = FormConstants.Prefix.TextBox_Name + name;
             txtBox.Text = value;
-            txtBox.Tag = key;
+            txtBox.Tag = name;
             txtBox.Size = new Size(700, 20);
             txtBox.Margin = new Padding(3, 1, 3, 0);
             panel.Controls.Add(txtBox);
             return txtBox;
         }
 
-        public static TextBox CreateTextArea(FlowLayoutPanel panel, string key, string value)
+        public static TextBox CreateTextArea(FlowLayoutPanel panel, string name, string value)
         {
-            CreateLabel(panel, key, key);
+            CreateLabel(panel, name, name);
 
             TextBox txtArea = new TextBox();
-            txtArea.Name = FormConstants.Prefix.TextArea_Name + key;
+            txtArea.Name = FormConstants.Prefix.TextArea_Name + name;
             txtArea.Text = string.IsNullOrEmpty(value) ? value : value.Replace("\n", "\r\n");
-            txtArea.Tag = key;
+            txtArea.Tag = name;
             txtArea.Multiline = true;
             txtArea.ScrollBars = ScrollBars.Vertical;
             txtArea.Size = new Size(700, 100);
@@ -65,6 +66,24 @@ namespace EricssonYAMLEditor.UI.Services
             btn.Click += onClick;
             panel.Controls.Add(btn);
             return btn;
+        }
+
+        public static ComboBox CreateComboBox(FlowLayoutPanel panel, string name, List<string> data, string selectedData)
+        {
+            CreateLabel(panel, name, name);
+
+            ComboBox comboBox = new ComboBox();
+            comboBox.Name = FormConstants.Prefix.ComboBox_Name + name;
+            comboBox.Size = new Size(700, 100);
+            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox.Items.AddRange(data.ToArray());
+            if (data.Contains(selectedData))
+            {
+                comboBox.SelectedIndex = data.FindIndex(item => item.Equals(selectedData));
+            }
+            comboBox.Tag = name;
+            panel.Controls.Add(comboBox);
+            return comboBox;
         }
 
         public static void ShowExceptionMessage(string message, string title, IWin32Window owner = null)

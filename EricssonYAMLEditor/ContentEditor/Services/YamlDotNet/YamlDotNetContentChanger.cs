@@ -1,6 +1,7 @@
 ﻿using EricssonYAMLEditor.ContentEditor.Model;
 using EricssonYAMLEditor.ContentEditor.Services.Interfaces;
 using EricssonYAMLEditor.Exception.Constants;
+using EricssonYAMLEditor.Exception.Model;
 using EricssonYAMLEditor.Node.Models;
 using System.Collections.Generic;
 
@@ -8,19 +9,33 @@ namespace EricssonYAMLEditor.ContentEditor.Services.YamlDotNet
 {
     class YamlDotNetContentChanger : IContentChanger
     {
+        IContentValidator _contentValidator;
+
+        public YamlDotNetContentChanger()
+        {
+            _contentValidator = new ContentValidator();
+        }
+
         public ContentEditorResult ChangeContent(YamlNode node, string value)
         {
             ContentEditorResult result = new ContentEditorResult();
             string propertyName = node.Name.Substring(node.Name.LastIndexOf(".") + 1);
-
-            if(ChangeOriginalData(node, propertyName, value))
+            if(_contentValidator.ValidateContent(propertyName, value))
             {
-                ChangeDataOfCurrentNode(node, propertyName, value);
+                if (ChangeOriginalData(node, propertyName, value))
+                {
+                    ChangeDataOfCurrentNode(node, propertyName, value);
+                }
+                else
+                {
+                    result.SetException(new ImplementationException(string.Format(ExceptionMessage.Not_Edited_Content, propertyName)));
+                }
             }
             else
             {
-                result.SetException(string.Format(ExceptionMessage.Not_Edited_Content, propertyName));
+                result.SetException(new ValidationException(string.Format(ExceptionMessage.Not_Valid_Content, propertyName)));
             }
+            
             return result;
         }
 
