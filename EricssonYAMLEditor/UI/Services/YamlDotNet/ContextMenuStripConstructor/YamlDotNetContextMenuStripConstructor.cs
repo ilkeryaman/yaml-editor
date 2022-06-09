@@ -6,6 +6,8 @@ using EricssonYAMLEditor.Node.Models;
 using EricssonYAMLEditor.Node.Services.Interfaces;
 using EricssonYAMLEditor.Node.Services.YamlDotNet;
 using EricssonYAMLEditor.UI.Constants;
+using EricssonYAMLEditor.UI.Models;
+using EricssonYAMLEditor.UI.Screens.AddItemScreen;
 using EricssonYAMLEditor.UI.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,26 +17,28 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
 {
     class YamlDotNetContextMenuStripConstructor : IContextMenuStripConstructor
     {
-        ContextMenuStrip _contextMenuStripWithAddRemove;
+        ContextMenuStrip _contextMenuStripWithAdd;
         ContextMenuStrip _contextMenuStripWithRemove;
+        ContextMenuStrip _contextMenuStripWithAddRemove;
         IYamlTreeBuilder<Dictionary<string, object>> _treeBuilder;
 
         public YamlDotNetContextMenuStripConstructor()
         {
-            _contextMenuStripWithAddRemove = GetContextMenuStripWithAddRemove();
+            _contextMenuStripWithAdd = GetContextMenuStripWithAdd();
             _contextMenuStripWithRemove = GetContextMenuStripWithRemove();
+            _contextMenuStripWithAddRemove = GetContextMenuStripWithAddRemove();
             _treeBuilder = new YamlDotNetTreeBuilder();
         }
 
-        public ContextMenuStrip GetContextMenuStrip(object data)
+        public ContextMenuStrip GetContextMenuStrip(object data, bool isRootNode = false)
         {
             if(data is KeyValuePair<string, object>)
             {
-                return ((KeyValuePair<string, object>)data).Value is List<object> ? _contextMenuStripWithAddRemove : _contextMenuStripWithRemove;
+                return ((KeyValuePair<string, object>)data).Value is List<object> ? (isRootNode ? _contextMenuStripWithAdd : _contextMenuStripWithAddRemove) : _contextMenuStripWithRemove;
             }
             else if(data is KeyValuePair<object, object>)
             {
-                return ((KeyValuePair<object, object>)data).Value is List<object> ? _contextMenuStripWithAddRemove : _contextMenuStripWithRemove;
+                return ((KeyValuePair<object, object>)data).Value is List<object> ? (isRootNode ? _contextMenuStripWithAdd : _contextMenuStripWithAddRemove) : _contextMenuStripWithRemove;
             }
             else if (data is Dictionary<object, object>)
             {
@@ -51,32 +55,49 @@ namespace EricssonYAMLEditor.UI.Services.YamlDotNet.ContextMenuStripConstructor
             return null;
         }
 
-        private ContextMenuStrip GetContextMenuStripWithAddRemove()
+        private ContextMenuStrip GetContextMenuStripWithAdd()
         {
-            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-            ToolStripMenuItem toolStripMenuItem_Add = new ToolStripMenuItem();
-            toolStripMenuItem_Add.Text = FormConstants.ToolStripMenuItem.Add.Text;
-            toolStripMenuItem_Add.Click += new EventHandler(toolStripMenuItem_Add_Click);
-            ToolStripMenuItem toolStripMenuItem_Remove = new ToolStripMenuItem();
-            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem.Remove.Text;
-            toolStripMenuItem_Remove.Click += new EventHandler(toolStripMenuItem_Remove_Click);
-            contextMenuStrip.Items.AddRange(new ToolStripMenuItem[] { toolStripMenuItem_Add, toolStripMenuItem_Remove });
-            return contextMenuStrip;
+            return GetContextMenuStrip(true, false);
         }
 
         private ContextMenuStrip GetContextMenuStripWithRemove()
         {
+            return GetContextMenuStrip(false, true);
+        }
+
+        private ContextMenuStrip GetContextMenuStripWithAddRemove()
+        {
+            return GetContextMenuStrip(true, true);
+        }
+
+        private ContextMenuStrip GetContextMenuStrip(bool hasAddMenuItem, bool hasRemoveMenuItem)
+        {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-            ToolStripMenuItem toolStripMenuItem_Remove = new ToolStripMenuItem();
-            toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem.Remove.Text;
-            toolStripMenuItem_Remove.Click += new EventHandler(toolStripMenuItem_Remove_Click);
-            contextMenuStrip.Items.AddRange(new ToolStripMenuItem[] { toolStripMenuItem_Remove });
+            List<ToolStripMenuItem> toolStripMenuItemList = new List<ToolStripMenuItem>();
+            if (hasAddMenuItem)
+            {
+                ToolStripMenuItem toolStripMenuItem_Add = new ToolStripMenuItem();
+                toolStripMenuItem_Add.Text = FormConstants.ToolStripMenuItem.Add.Text;
+                toolStripMenuItem_Add.Click += new EventHandler(toolStripMenuItem_Add_Click);
+                toolStripMenuItemList.Add(toolStripMenuItem_Add);
+            }
+            if (hasRemoveMenuItem)
+            {
+                ToolStripMenuItem toolStripMenuItem_Remove = new ToolStripMenuItem();
+                toolStripMenuItem_Remove.Text = FormConstants.ToolStripMenuItem.Remove.Text;
+                toolStripMenuItem_Remove.Click += new EventHandler(toolStripMenuItem_Remove_Click);
+                toolStripMenuItemList.Add(toolStripMenuItem_Remove);
+            }
+            contextMenuStrip.Items.AddRange(toolStripMenuItemList.ToArray());
             return contextMenuStrip;
         }
+        
 
         private void toolStripMenuItem_Add_Click(object sender, EventArgs e)
         {
             TreeNode selectedNode = GetSelectedTreeNode(sender);
+            AddNewItemForm addNewItemForm = new AddNewItemForm(new AddNewItemFormParams() { TreeNode = selectedNode, ContextMenuStripConstructor = this });
+            DialogResult dg = addNewItemForm.ShowDialog();
         }
 
         private void toolStripMenuItem_Remove_Click(object sender, EventArgs e)

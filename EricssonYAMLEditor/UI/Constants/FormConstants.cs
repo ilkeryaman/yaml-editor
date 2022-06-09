@@ -31,6 +31,12 @@ namespace EricssonYAMLEditor.UI.Constants
 
         public struct Label
         {
+            public struct CopyItemTemplateFrom
+            {
+                public const string Name = "lbl_CopyItemTemplate";
+                public const string Text = "Copy item template from:";
+            }
+
             public struct ValueSet
             {
                 public const string Name = "ValueSet";
@@ -64,6 +70,11 @@ namespace EricssonYAMLEditor.UI.Constants
                     public const string ControlPlane = ">> " + PropertyKey.FullName.controlplane;
                     public const string WorkerPools = ">> " + PropertyKey.FullName.worker_pools;
                 }
+            }
+
+            public struct AddNewItem
+            {
+                public const string Text = "Add New Item";
             }
         }
     }

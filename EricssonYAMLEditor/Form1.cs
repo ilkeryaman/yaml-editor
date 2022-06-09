@@ -49,15 +49,15 @@ namespace EricssonYAMLEditor
                 IYamlParser<Dictionary<string, object>> yamlParser = new YamlDotNetParser();
                 Dictionary<string, object> yamlData = yamlParser.DeSerializeDocumentToClass(filePath);
                 IYamlTreeBuilder<Dictionary<string, object>> yamlTreeBuilder = new YamlDotNetTreeBuilder();
-                //IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
                 YamlNode rootYamlNode = yamlTreeBuilder.BuildTree(yamlData);
                 if (RenderTreeView(rootYamlNode))
                 {
                     pageManager.Reset();
                 }
+                //IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
                 //yamlNodeDictionary = tree2dictionaryConverter.Convert(rootYamlNode);
             }
-            catch(IllegalYamlFileException exc)
+            catch (IllegalYamlFileException exc)
             {
                 ControlCreator.ShowExceptionMessage(exc.Message, ExceptionMessage.Error, this);
             }
@@ -66,10 +66,7 @@ namespace EricssonYAMLEditor
         private bool RenderTreeView(YamlNode rootYamlNode)
         {
             IContextMenuStripConstructor contextMenuStripConstructor = new YamlDotNetContextMenuStripConstructor();
-            rootNode = new TreeNode();
-            rootNode.Name = rootYamlNode.Name;
-            rootNode.Text = rootYamlNode.Name;
-            rootNode.Tag = rootYamlNode;
+            rootNode = TreeNodeService.CreateNode(rootYamlNode.Name, rootYamlNode.Name, null, rootYamlNode);
             return PrepareTreeViews(rootYamlNode, contextMenuStripConstructor);
         }
 
@@ -100,28 +97,10 @@ namespace EricssonYAMLEditor
             {
                 throw new IllegalYamlFileException();
             }
-            TreeNode treeNode = new TreeNode();
-            treeNode.Name = foundNode.Name;
-            treeNode.Text = foundNode.Name;
-            treeNode.Tag = foundNode;
-            treeNode.ContextMenuStrip = contextMenuStripConstructor.GetContextMenuStrip(foundNode.Data);
-            treeNode.Expand();
+            TreeNode treeNode = TreeNodeService.CreateNode(foundNode.Name, foundNode.Name, contextMenuStripConstructor, foundNode, true);
+            TreeNodeService.AddSubNodes(treeNode, foundNode, contextMenuStripConstructor);
             treeView.Nodes.Add(treeNode);
-            AddSubNodes(treeNode, foundNode, contextMenuStripConstructor);
-        }
-
-        private void AddSubNodes(TreeNode parentTreeNode, YamlNode yamlNode, IContextMenuStripConstructor contextMenuStripConstructor)
-        {
-            foreach (YamlNode node in yamlNode.SubNodeList)
-            {
-                TreeNode treeNode = new TreeNode();
-                treeNode.Name = node.Name;
-                treeNode.Text = node.GetVisibleName(node.Name, node.ParentNode.Name);
-                treeNode.Tag = node;
-                treeNode.ContextMenuStrip = contextMenuStripConstructor.GetContextMenuStrip(node.Data);
-                parentTreeNode.Nodes.Add(treeNode);
-                AddSubNodes(treeNode, node, contextMenuStripConstructor);
-            }
+            treeNode.Expand();
         }
 
         #region Events

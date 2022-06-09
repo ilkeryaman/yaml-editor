@@ -2,8 +2,8 @@
 
 namespace EricssonYAMLEditor.UI.Services.Interfaces
 {
-    interface IContextMenuStripConstructor
+    public interface IContextMenuStripConstructor
     {
-        ContextMenuStrip GetContextMenuStrip(object data);
+        ContextMenuStrip GetContextMenuStrip(object data, bool isRootNode = false);
     }
 }

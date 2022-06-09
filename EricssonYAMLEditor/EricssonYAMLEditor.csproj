@@ -84,6 +84,7 @@
     <Compile Include="Node\Services\YamlTree2DictionaryConverter.cs" />
     <Compile Include="Parser\Services\Interfaces\ISerializer.cs" />
     <Compile Include="Parser\Services\Interfaces\IYamlParser.cs" />
+    <Compile Include="Parser\Services\ObjectCloner.cs" />
     <Compile Include="Parser\Services\PropertyNamer.cs" />
     <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetDictionaryParserFactory.cs" />
     <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetKeyValuePairParserFactory.cs" />
@@ -97,12 +98,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Constants\FormConstants.cs" />
     <Compile Include="UI\Constants\Notification.cs" />
+    <Compile Include="UI\Models\AddNewItemFormParams.cs" />
+    <Compile Include="UI\Screens\AddItemScreen\AddNewItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\AddItemScreen\AddNewItemForm.Designer.cs">
+      <DependentUpon>AddNewItemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Services\ComboBoxReferenceMapService.cs" />
     <Compile Include="UI\Services\Interfaces\IContextMenuStripConstructor.cs" />
     <Compile Include="UI\Services\DynamicPanelGenerator.cs" />
     <Compile Include="UI\Services\Interfaces\IDynamicPanelConstructor.cs" />
     <Compile Include="UI\Services\ControlCreator.cs" />
     <Compile Include="UI\Services\PageManager.cs" />
+    <Compile Include="UI\Services\TreeNodeService.cs" />
     <Compile Include="UI\Services\YamlDotNet\ContextMenuStripConstructor\YamlDotNetContextMenuStripConstructor.cs" />
     <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDictionaryDynamicControlConstructorFactory.cs" />
     <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDynamicControlConstructorFactory.cs" />
@@ -124,6 +133,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Screens\AddItemScreen\AddNewItemForm.resx">
+      <DependentUpon>AddNewItemForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

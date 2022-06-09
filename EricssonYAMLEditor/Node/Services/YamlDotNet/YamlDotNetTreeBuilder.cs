@@ -21,10 +21,11 @@ namespace EricssonYAMLEditor.Node.Services.YamlDotNet
             return rootYamlNode;
         }
 
-        public void ProcessNode(string propertyName, object value, YamlNode parentNode)
+        public YamlNode ProcessNode(string propertyName, object value, YamlNode parentNode)
         {
             YamlNode newNode = AddNode(propertyName, value, parentNode);
             ProcessSubNodes(propertyName, value, newNode);
+            return newNode;
         }
 
         private YamlNode AddNode(string propertyName, object value, YamlNode parentNode)
