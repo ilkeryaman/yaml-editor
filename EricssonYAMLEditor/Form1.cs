@@ -22,8 +22,7 @@ namespace EricssonYAMLEditor
     public partial class Form1 : Form
     {
         PageManager pageManager;
-        TreeNode rootNode;
-        //Dictionary<string, object> yamlNodeDictionary;
+        YamlNode rootYamlNode;
 
         public Form1()
         {
@@ -49,13 +48,16 @@ namespace EricssonYAMLEditor
                 IYamlParser<Dictionary<string, object>> yamlParser = new YamlDotNetParser();
                 Dictionary<string, object> yamlData = yamlParser.DeSerializeDocumentToClass(filePath);
                 IYamlTreeBuilder<Dictionary<string, object>> yamlTreeBuilder = new YamlDotNetTreeBuilder();
-                YamlNode rootYamlNode = yamlTreeBuilder.BuildTree(yamlData);
+                rootYamlNode = yamlTreeBuilder.BuildTree(yamlData);
                 if (RenderTreeView(rootYamlNode))
                 {
                     pageManager.Reset();
                 }
-                //IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
-                //yamlNodeDictionary = tree2dictionaryConverter.Convert(rootYamlNode);
+                /*
+                    // If dictionary format is needed, there is a converter class also.
+                    IYamlTree2DictionaryConverter tree2dictionaryConverter = new YamlTree2DictionaryConverter();
+                    Dictionary<string, object> yamlNodeDictionary; = tree2dictionaryConverter.Convert(rootYamlNode);
+                */
             }
             catch (IllegalYamlFileException exc)
             {
@@ -66,7 +68,6 @@ namespace EricssonYAMLEditor
         private bool RenderTreeView(YamlNode rootYamlNode)
         {
             IContextMenuStripConstructor contextMenuStripConstructor = new YamlDotNetContextMenuStripConstructor();
-            rootNode = TreeNodeService.CreateNode(rootYamlNode.Name, rootYamlNode.Name, null, rootYamlNode);
             return PrepareTreeViews(rootYamlNode, contextMenuStripConstructor);
         }
 
@@ -127,7 +128,7 @@ namespace EricssonYAMLEditor
                 string filePath = saveFileDialog1.FileName;
                 ISerializer serializer = new YamlDotNetSerializer();
                 IFileSaver<string> fileSaver = new FileSaver();
-                fileSaver.Save(filePath, serializer.Serialize(((YamlNode)rootNode.Tag).Data));
+                fileSaver.Save(filePath, serializer.Serialize(rootYamlNode.Data));
             }
         }
 

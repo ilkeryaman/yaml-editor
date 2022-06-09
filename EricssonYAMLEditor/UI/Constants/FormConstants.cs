@@ -37,6 +37,12 @@ namespace EricssonYAMLEditor.UI.Constants
                 public const string Text = "Copy item template from:";
             }
 
+            public struct Content
+            {
+                public const string Name = "lbl_Content";
+                public const string Text = "Content:";
+            }
+
             public struct ValueSet
             {
                 public const string Name = "ValueSet";

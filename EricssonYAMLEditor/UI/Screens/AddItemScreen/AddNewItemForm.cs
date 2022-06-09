@@ -2,10 +2,12 @@
 using EricssonYAMLEditor.Node.Services.Interfaces;
 using EricssonYAMLEditor.Node.Services.YamlDotNet;
 using EricssonYAMLEditor.Parser.Services;
+using EricssonYAMLEditor.Parser.Services.YamlDotNet;
 using EricssonYAMLEditor.UI.Constants;
 using EricssonYAMLEditor.UI.Models;
 using EricssonYAMLEditor.UI.Services;
 using EricssonYAMLEditor.UI.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -31,6 +33,8 @@ namespace EricssonYAMLEditor.UI.Screens.AddItemScreen
         {
             this.label1.Name = FormConstants.Label.CopyItemTemplateFrom.Name;
             this.label1.Text = FormConstants.Label.CopyItemTemplateFrom.Text;
+            this.label2.Name = FormConstants.Label.Content.Name;
+            this.label2.Text = FormConstants.Label.Content.Text;
             this.button1.Text = FormConstants.Button.AddNewItem.Text;
         }
 
@@ -74,6 +78,13 @@ namespace EricssonYAMLEditor.UI.Screens.AddItemScreen
             TreeNode treeNode = PrepareTreeNode(newNode);
             _params.TreeNode.Nodes.Add(treeNode);
             this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Parser.Services.Interfaces.ISerializer serializer = new YamlDotNetSerializer();
+            string serializedData = serializer.Serialize(_list[this.comboBox1.SelectedIndex]);
+            this.txtArea.Text = serializedData;
         }
 
         private object PrepareData()
