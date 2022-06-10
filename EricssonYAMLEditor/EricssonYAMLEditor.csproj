@@ -105,6 +105,12 @@
     <Compile Include="UI\Screens\AddItemScreen\AddNewItemForm.Designer.cs">
       <DependentUpon>AddNewItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Screens\LoadingScreen\LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\LoadingScreen\LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Services\ComboBoxReferenceMapService.cs" />
     <Compile Include="UI\Services\Interfaces\IContextMenuStripConstructor.cs" />
     <Compile Include="UI\Services\DynamicPanelGenerator.cs" />
@@ -136,6 +142,9 @@
     <EmbeddedResource Include="UI\Screens\AddItemScreen\AddNewItemForm.resx">
       <DependentUpon>AddNewItemForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Screens\LoadingScreen\LoadingForm.resx">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -150,7 +159,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\loading.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

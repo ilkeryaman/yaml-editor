@@ -59,5 +59,15 @@ namespace EricssonYAMLEditor.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ezgif_3_79caad3994 {
+            get {
+                object obj = ResourceManager.GetObject("ezgif-3-79caad3994", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

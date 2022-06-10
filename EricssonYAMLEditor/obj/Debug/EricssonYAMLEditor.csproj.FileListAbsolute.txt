@@ -14,3 +14,4 @@ C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\Ericss
 C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.pdb
 C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.csprojResolveAssemblyReference.cache
 C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.UI.Screens.AddItemScreen.AddNewItemForm.resources
+C:\Users\eilkyam\Documents\Visual Studio 2015\Projects\EricssonYAMLEditor\EricssonYAMLEditor\obj\Debug\EricssonYAMLEditor.UI.Screens.LoadingScreen.LoadingForm.resources

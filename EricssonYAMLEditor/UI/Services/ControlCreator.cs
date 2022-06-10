@@ -1,7 +1,9 @@
 ﻿using EricssonYAMLEditor.Exception.Constants;
 using EricssonYAMLEditor.UI.Constants;
+using EricssonYAMLEditor.UI.Screens.LoadingScreen;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EricssonYAMLEditor.UI.Services
@@ -84,6 +86,12 @@ namespace EricssonYAMLEditor.UI.Services
             comboBox.Tag = name;
             panel.Controls.Add(comboBox);
             return comboBox;
+        }
+
+        public static void LoadingAnimation(int intervalMillis = 2000)
+        {
+            LoadingForm loadingForm = new LoadingForm(intervalMillis);
+            loadingForm.ShowDialog();
         }
 
         public static void ShowExceptionMessage(string message, string title, IWin32Window owner = null)

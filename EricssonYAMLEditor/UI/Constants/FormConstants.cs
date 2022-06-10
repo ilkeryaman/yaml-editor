@@ -31,6 +31,11 @@ namespace EricssonYAMLEditor.UI.Constants
 
         public struct Label
         {
+            public struct Loading
+            {
+                public const string Text = "Loading...";
+            }
+
             public struct CopyItemTemplateFrom
             {
                 public const string Name = "lbl_CopyItemTemplate";
