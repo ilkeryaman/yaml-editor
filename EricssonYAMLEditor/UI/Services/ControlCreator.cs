@@ -88,7 +88,7 @@ namespace EricssonYAMLEditor.UI.Services
             return comboBox;
         }
 
-        public static void LoadingAnimation(int intervalMillis = 2000)
+        public static void LoadingAnimation(int intervalMillis = 1000)
         {
             LoadingForm loadingForm = new LoadingForm(intervalMillis);
             loadingForm.ShowDialog();
