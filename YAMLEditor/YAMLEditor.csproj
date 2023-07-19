@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D159DA7-737A-4772-ABBC-A4B1DAD412EE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YAMLEditor</RootNamespace>
+    <AssemblyName>YAMLEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.11.2.1\lib\net45\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContentEditor\Model\ContentEditorResult.cs" />
+    <Compile Include="ContentEditor\Services\ContentValidator.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IContentAdder.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IContentChanger.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IContentRemover.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IContentValidator.cs" />
+    <Compile Include="ContentEditor\Services\Interfaces\IValidatorFactory.cs" />
+    <Compile Include="ContentEditor\Services\Validator\IPValidatorFactory.cs" />
+    <Compile Include="ContentEditor\Services\Validator\WhiteSpaceValidatorFactory.cs" />
+    <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentAdder.cs" />
+    <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentChanger.cs" />
+    <Compile Include="ContentEditor\Services\YamlDotNet\YamlDotNetContentRemover.cs" />
+    <Compile Include="Exception\Constants\ExceptionMessage.cs" />
+    <Compile Include="Exception\Model\IllegalYamlFileException.cs" />
+    <Compile Include="Exception\Model\ImplementationException.cs" />
+    <Compile Include="Exception\Model\ValidationException.cs" />
+    <Compile Include="File\Services\Interfaces\IFileSaver.cs" />
+    <Compile Include="File\Services\FileSaver.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Node\Constants\PropertyKey.cs" />
+    <Compile Include="Node\Models\YamlNode.cs" />
+    <Compile Include="Node\Services\Interfaces\INodeSearcher.cs" />
+    <Compile Include="Node\Services\Interfaces\IYamlTree2DictionaryConverter.cs" />
+    <Compile Include="Node\Services\Interfaces\IYamlTreeBuilder.cs" />
+    <Compile Include="Node\Services\NodeSearcher.cs" />
+    <Compile Include="Node\Services\YamlDotNet\YamlDotNetTreeBuilder.cs" />
+    <Compile Include="Node\Services\YamlTree2DictionaryConverter.cs" />
+    <Compile Include="Parser\Services\Interfaces\ISerializer.cs" />
+    <Compile Include="Parser\Services\Interfaces\IYamlParser.cs" />
+    <Compile Include="Parser\Services\ObjectCloner.cs" />
+    <Compile Include="Parser\Services\PropertyNamer.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetDictionaryParserFactory.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetKeyValuePairParserFactory.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetListParserFactory.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetPrimitiveTypeParserFactory.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetPropertyContentParserFactory.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\PropertyContentParser\YamlDotNetStringKeyValuePairParserFactory.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\YamlDotNetParser.cs" />
+    <Compile Include="Parser\Services\YamlDotNet\YamlDotNetSerializer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Constants\FormConstants.cs" />
+    <Compile Include="UI\Constants\Notification.cs" />
+    <Compile Include="UI\Models\AddNewItemFormParams.cs" />
+    <Compile Include="UI\Screens\AddItemScreen\AddNewItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\AddItemScreen\AddNewItemForm.Designer.cs">
+      <DependentUpon>AddNewItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Screens\LoadingScreen\LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\LoadingScreen\LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Services\ComboBoxReferenceMapService.cs" />
+    <Compile Include="UI\Services\Interfaces\IContextMenuStripConstructor.cs" />
+    <Compile Include="UI\Services\DynamicPanelGenerator.cs" />
+    <Compile Include="UI\Services\Interfaces\IDynamicPanelConstructor.cs" />
+    <Compile Include="UI\Services\ControlCreator.cs" />
+    <Compile Include="UI\Services\PageManager.cs" />
+    <Compile Include="UI\Services\TreeNodeService.cs" />
+    <Compile Include="UI\Services\YamlDotNet\ContextMenuStripConstructor\YamlDotNetContextMenuStripConstructor.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDictionaryDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetKeyValuePairDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetListDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetPrimitiveTypeDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\DynamicControlConstructor\YamlDotNetStringKeyValuePairDynamicControlConstructorFactory.cs" />
+    <Compile Include="UI\Services\YamlDotNet\YamlDotNetDynamicPanelConstructor.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UI\Screens\AddItemScreen\AddNewItemForm.resx">
+      <DependentUpon>AddNewItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Screens\LoadingScreen\LoadingForm.resx">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
